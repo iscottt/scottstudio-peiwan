@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "mini-css-extract-plugin": "^2.9.0",
+    "swiper": "^11.2.10",
     "vue": "^3.4.29"
   }
 }

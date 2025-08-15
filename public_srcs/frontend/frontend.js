@@ -4,10 +4,13 @@ import Peiwan from './peiwan.vue';
 import axios from 'axios';
 
 function init() {
+    initVue('.slider-wrapper')
+    return
   if (localStorage.getItem('peiwanConfig')) {
     const config = JSON.parse(localStorage.getItem('peiwanConfig'));
     const selector = config.peiwan_selector;
-    initVue(selector)
+    // initVue(selector)
+    initVue('body')
     return
   }
   axios({
@@ -17,7 +20,8 @@ function init() {
     .then(({ data }) => {
       localStorage.setItem('peiwanConfig', JSON.stringify(data));
       const selector = data.peiwan_selector;
-      init(selector)
+      // init(selector)
+      init('body')
     })
     .catch((error) => {
       console.error('Error fetching configuration:', error);
