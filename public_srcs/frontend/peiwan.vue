@@ -14,16 +14,20 @@
         </swiper-slide>
       </template>
       <div class="playmate-swiper__pagination"></div>
-      <img :src="playmateConfig.peiwan_tag" alt="" class="tag">
+      <img v-if="playmateConfig.peiwan_tag" :src="playmateConfig.peiwan_tag" alt="" class="tag">
       <div class="playmate-detail p-flex">
-        <div class="avatar">
+        <a class="avatar" :href="`/author/${currentPlaymateUser.id}`" role="button">
           <img :src="currentPlaymateUser.avatar" alt="">
-        </div>
+        </a>
         <div class="info">
           <p class="nickname ellipsis">{{ currentPlaymateUser.name }}</p>
-          <div class="career-list p-flex">
-            <img v-for="img in currentBadges" :src="img.img" :data-tooltip="img.name">
+
+          <div class="flex items-center gap-1 mb-1">
+            <UserMetas :user="currentPlaymateUser" :vip-level="currentPlaymateUser.vipLevel" :site_metas="siteMetas" />
           </div>
+          <!-- <div class="career-list p-flex">
+            <img v-for="img in currentBadges" :src="img.img" :data-tooltip="img.name">
+          </div> -->
         </div>
         <a class="btn" target="_blank" v-if="playmateConfig.playmates"
           :href="playmateConfig.playmates[swiperSlideIndex].url">{{ playmateConfig.playmates[swiperSlideIndex].text
@@ -40,7 +44,6 @@
             <a :href="item.url" target="_blank"><img :src="item.image" alt=""></a>
           </swiper-slide>
         </template>
-
         <div class="banner-swiper__pagination"></div>
       </swiper>
       <div class="activity-zone">
@@ -54,20 +57,24 @@
         </div>
         <div class="playmate-list p-flex">
           <template v-for="user in currentUserList">
-            <div class="item">
+            <a class="item" :href="`/author/${user.id}`" role="button">
               <div class="cover">
                 <img :src="user.avatar" alt="">
               </div>
               <p class="nickname ellipsis">{{ user.name }}</p>
-              <div class="career-list p-flex">
+
+          <div class="flex items-center justify-center gap-1 mb-1">
+            <UserMetas :user="user" :vip-level="user.vipLevel" :site_metas="siteMetas" />
+          </div>
+              <!-- <div class="career-list p-flex">
                 <span v-for="img in user.formatBadges" alt="" :key="img.img" :data-tooltip="img.name">
                   <img :src="img.img">
                 </span>
-              </div>
-            </div>
+              </div> -->
+            </a>
           </template>
         </div>
-        <b :style="`background: url('${playmateConfig.zone_tag}') no-repeat;`">{</b>
+        <b :style="`background: url('${playmateConfig.zone_tag}') no-repeat;`"></b>
       </div>
     </div>
   </div>
@@ -81,6 +88,8 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 import axios from 'axios';
 import { computed, ref } from 'vue';
+import UserMetas from './userMetas.vue';
+
 const pagination = {
   el: '.playmate-swiper__pagination',
   clickable: true,
@@ -99,6 +108,7 @@ const modules = [EffectCoverflow, Pagination]
 const swiperSlideIndex = ref(0)
 const zoneIndex = ref(0)
 const playmateConfig = ref({})
+const piniaStore = sessionStorage.getItem('piniaStore')
 const currentPlaymateUser = computed(() => {
   if (!playmateConfig.value.playmates) return {}
   return JSON.parse(playmateConfig.value.playmates[swiperSlideIndex.value].uid)
@@ -107,26 +117,24 @@ function transitionEnd(e) {
   swiperSlideIndex.value = e.realIndex
 }
 const badges = ref([])
+const siteMetas = ref([])
 async function requestData() {
   const { data } = await axios({
     method: 'post',
-    url: '/nv/get-options',
-    data: {
-      names: ['playmates', 'sc_badges']
-    }
+    url: '/peiwan/site-opts'
   })
+  siteMetas.value = data
   playmateConfig.value = data.playmates
   badges.value = data.sc_badges
-  console.log('data', data)
 }
 const currentUserList = computed(() => {
   const zoneData = playmateConfig.value.zones?.[zoneIndex.value]
   if (!zoneData?.uids) return []
-  
+
   const badgeItems = badges.value
   return zoneData.uids.map(item => {
     const user = JSON.parse(item)
-    user.formatBadges = badgeItems.filter((badge, index) => 
+    user.formatBadges = badgeItems.filter((badge, index) =>
       user.badges?.[index] === badge.name
     )
     return user
@@ -136,9 +144,9 @@ const currentUserList = computed(() => {
 const currentBadges = computed(() => {
   const playmate = playmateConfig.value.playmates?.[swiperSlideIndex.value]
   if (!playmate?.uid) return []
-  
+
   const userInfo = JSON.parse(playmate.uid)
-  return badges.value.filter((badge, index) => 
+  return badges.value.filter((badge, index) =>
     userInfo.badges?.[index] === badge.name
   )
 })

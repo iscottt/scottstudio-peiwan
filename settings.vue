@@ -244,6 +244,7 @@ const renderLabel = (option) => {
 	)
 }
 var requestData = () => {
+	handleSearch('')
 	$axios({
 		method: 'post',
 		url: $API + '/nv/get-options',
@@ -259,11 +260,6 @@ var requestData = () => {
 		})
 }
 function handleSearch(keyword) {
-	if (!keyword.length) {
-		user_options.value = []
-		return
-	}
-
 	$axios({
 		method: 'POST',
 		url: $API + '/nv/get-user-list',
