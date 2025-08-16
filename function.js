@@ -24,11 +24,10 @@ add_submenu_page({
 	component_url: `/block-peiwan/settings.vue`,
 })
 
-register_rest_route('scottstudio', 'peiwan/get-config', {
-	methods: 'post',
-	callback(data, req) {
-		return get_options([
-			
-		])
-	}
-});
+add_filter('rest_send_post:/nv/get-user-list', (users, req) => {
+  return users.map(user => {
+    user.avatar = get_user_meta(user.id, 'avatar_url') || ''
+    user.badges = get_user_meta(user.id, 'badges') || []
+    return user
+  })
+})
