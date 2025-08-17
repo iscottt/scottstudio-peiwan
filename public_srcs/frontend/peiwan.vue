@@ -20,7 +20,7 @@
           <img :src="currentPlaymateUser.avatar" alt="">
         </a>
         <div class="info">
-          <p class="nickname ellipsis">{{ currentPlaymateUser.name }}</p>
+          <p class="nickname ellipsis font-semibold">{{ currentPlaymateUser.name }}</p>
 
           <div class="flex items-center gap-1 mb-1">
             <UserMetas :user="currentPlaymateUser" :vip-level="currentPlaymateUser.vipLevel" :site_metas="siteMetas" />
@@ -50,7 +50,7 @@
         <div class="type-list p-flex">
           <template v-for="(item, index) in playmateConfig.zones" :key="item.title">
             <div @click="zoneIndex = index" class="type p-flex" :class="{ active: index === zoneIndex }"> {{ item.title
-            }}
+              }}
               <a class="more p-flex" :href="item.url" role="button" target="_blank">更多<i></i></a>
             </div>
           </template>
@@ -61,11 +61,11 @@
               <div class="cover">
                 <img :src="user.avatar" alt="">
               </div>
-              <p class="nickname ellipsis">{{ user.name }}</p>
+              <p class="nickname ellipsis font-semibold">{{ user.name }}</p>
 
-          <div class="flex items-center justify-center gap-1 mb-1">
-            <UserMetas :user="user" :vip-level="user.vipLevel" :site_metas="siteMetas" />
-          </div>
+              <div class="flex items-center justify-center gap-1 mb-1">
+                <UserMetas :user="user" :vip-level="user.vipLevel" :site_metas="siteMetas" />
+              </div>
               <!-- <div class="career-list p-flex">
                 <span v-for="img in user.formatBadges" alt="" :key="img.img" :data-tooltip="img.name">
                   <img :src="img.img">
@@ -141,21 +141,11 @@ const currentUserList = computed(() => {
   })
 })
 
-const currentBadges = computed(() => {
-  const playmate = playmateConfig.value.playmates?.[swiperSlideIndex.value]
-  if (!playmate?.uid) return []
-
-  const userInfo = JSON.parse(playmate.uid)
-  return badges.value.filter((badge, index) =>
-    userInfo.badges?.[index] === badge.name
-  )
-})
 requestData()
 </script>
 <style>
 .page-recommend__panel {
   padding: 48px 0;
-  background: #F3F5F6;
   justify-content: center;
 }
 
@@ -208,7 +198,7 @@ requestData()
   height: 80px;
   padding: 10px 14px 20px 14px;
   margin: 0 auto;
-  background: #fff;
+  background: var(--w-bg);
   border-radius: 0 0 8px 8px
 }
 
@@ -232,7 +222,7 @@ requestData()
 }
 
 .page-recommend__panel .playmate-detail .info .nickname {
-  color: #2a2a2a;
+  color: hsl(var(--font-color));
   font-size: 14px
 }
 
@@ -329,13 +319,13 @@ requestData()
   width: 800px;
   height: 266px;
   padding: 15px;
-  background: #fff;
+  background: var(--w-bg);
   border-radius: 16px
 }
 
 .page-recommend__panel .activity-zone .type {
   width: 174px;
-  color: #979797;
+  color: hsl(var(--font-color) / .5);
   font-size: 16px;
   height: 32px;
   padding: 10px;
@@ -344,14 +334,16 @@ requestData()
   justify-content: space-between;
   border-radius: 16px;
   margin: 0 10px 25px 0;
-  background-color: #f0f0f0;
+  transition: .35s;
+
+  background: var(--bg);
   cursor: pointer
 }
 
 .page-recommend__panel .activity-zone .type.active {
-  background: #edf2ff;
+  background: var(--primary-opacity-1);
   color: #467cfd;
-  font-size: 20px
+  font-size: 18px
 }
 
 .page-recommend__panel .activity-zone .type.active .more {
@@ -386,6 +378,10 @@ requestData()
 }
 
 /* playlist */
+.playmate-list {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
 
 .playmate-list .item {
   margin: 0 16px;
@@ -402,11 +398,11 @@ requestData()
 
 .playmate-list .item .cover img {
   width: 100%;
-  height: 100%
+  height: 100%;
+  object-fit: cover;
 }
 
 .playmate-list .item .nickname {
-  color: #2a2a2a;
   font-size: 14px;
   text-align: center;
   margin-bottom: 8px
@@ -423,5 +419,58 @@ requestData()
   height: 18px;
   margin: 0 3px;
   border-radius: 2px
+}
+
+/* 移动端 */
+@media screen and (max-width: 768px) {
+  .page-recommend__panel {
+    flex-direction: column;
+  }
+
+  .page-recommend__panel .recommend-playmate__swiper {
+    margin-right: 0;
+    margin-bottom: 24px;
+  }
+
+  .page-recommend__panel .banner-swiper {
+    width: calc(100vw - 48px);
+    margin: 0 auto;
+    margin-bottom: 24px;
+  }
+
+  .page-recommend__panel .activity-zone {
+    width: calc(100vw - 48px);
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .page-recommend__panel .activity-zone .type-list {
+    width: 50%;
+    overflow-x: auto;
+  }
+
+  .page-recommend__panel .activity-zone .type {
+    flex-shrink: 0;
+    width: auto;
+    gap: 12px;
+  }
+
+  .playmate-list {
+    gap: 12px;
+  }
+
+  .playmate-list .item {
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .playmate-list .item .cover {
+    width: 60px;
+    height: 60px;
+  }
+
+  .page-recommend__panel .activity-zone .type.active {
+    font-size: 15px;
+  }
 }
 </style>
