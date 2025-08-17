@@ -4,24 +4,19 @@ import Peiwan from './peiwan.vue';
 import axios from 'axios';
 
 function init() {
-    initVue('.slider-wrapper')
-    return
-  if (localStorage.getItem('peiwanConfig')) {
-    const config = JSON.parse(localStorage.getItem('peiwanConfig'));
-    const selector = config.peiwan_selector;
-    // initVue(selector)
-    initVue('body')
+  if (localStorage.getItem('selector')) {
+    const selector = localStorage.getItem('selector');
+    initVue(selector)
     return
   }
   axios({
     method: 'post',
-    url: '/scottstudio/peiwan/get-config',
+    url: '/peiwan/site-opts',
   })
     .then(({ data }) => {
-      localStorage.setItem('peiwanConfig', JSON.stringify(data));
-      const selector = data.peiwan_selector;
-      // init(selector)
-      init('body')
+      localStorage.setItem('selector', data.playmates.peiwan_selector);
+      const selector = data.playmates.peiwan_selector;
+      init(selector)
     })
     .catch((error) => {
       console.error('Error fetching configuration:', error);

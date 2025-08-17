@@ -18,7 +18,7 @@ module.exports = defineConfig({
 		config.plugins.delete('html')
 		config.plugins.delete('preload')
 		config.plugins.delete('prefetch')
-		config.optimization.minimize(true)// 开启压缩js代码
+		config.optimization.minimize(false)// 开启压缩js代码
 	},
 	css: {
 		extract: {
