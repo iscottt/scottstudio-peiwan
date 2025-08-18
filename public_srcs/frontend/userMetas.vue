@@ -20,6 +20,10 @@ const props = defineProps({
   site_metas:{
     type: Object,
     default: {}
+  },
+  is_left:{
+    type: Boolean,
+    default: true
   }
 })
 const levelImgMap = computed(() => {
@@ -52,7 +56,7 @@ const vipLevel = computed(() => {
   return findOne || {}
 })
 const userID = computed(() => {
-  return props.isUser ? props.user.id : props.user.author
+  return props.user.id
 })
 // 展开查看所有徽章
 function showBadgesModal() {
@@ -87,14 +91,14 @@ const currentBadge = computed(() => {
       class="h-3 img-liang">
     <SvgIcon v-else icon="icon-liang" size="14" />
   </span>
+  <!-- 会员徽章 -->
+  <div v-if="vipLevel.name && is_left" :data-tooltip="vipLevel.name">
+    <img :src="vipLevel.img" class="h-4">
+  </div>
   <span v-if="userID" class="!text-xs !text-[--error-color] flex items-center gap-1"
     :data-tooltip="`ID${isBeautifulID(userID) ? '靓' : ''}号:${userID}`">
     <span class="blogger-tag warn !font-bold">ID:{{ userID }}</span>
   </span>
-  <!-- 会员徽章 -->
-  <div v-if="vipLevel.name && !hideVip" :data-tooltip="vipLevel.name">
-    <img :src="vipLevel.img" class="h-4">
-  </div>
   <template v-if="user.badges">
     <!-- 自定义徽章 -->
     <div v-if="isUser"
@@ -187,20 +191,22 @@ const currentBadge = computed(() => {
     <img v-if="showLastLevel" class="h-4" :src="lastLevel" alt="">
     <img v-else class="h-4" :src="levelImgMap[(user.author_level || user.level) - 1]">
   </div>
-  <!-- 用户角色 -->
-  <template v-if="user.power === 10">
-    <!-- 设置了站长徽标则显示图片 -->
-    <span v-if="site_metas.somnia_blogger_logo" :data-tooltip="user.role">
-      <img :src="site_metas.somnia_blogger_logo" class="h-4">
-    </span>
-    <div v-else
+  <template v-if="!is_left">
+    <!-- 用户角色 -->
+    <template v-if="user.power === 10">
+      <!-- 设置了站长徽标则显示图片 -->
+      <span v-if="site_metas.somnia_blogger_logo" :data-tooltip="user.role">
+        <img :src="site_metas.somnia_blogger_logo" class="h-4">
+      </span>
+      <div v-else
+        class="px-1 py-0.5 rounded-md text-[10px] leading-tight  bg-blue-400/20 dark:bg-blue-400/20 text-blue-700 dark:text-blue-400">
+        {{ user.role }}
+      </div>
+    </template>
+    <div v-else-if="user.role"
       class="px-1 py-0.5 rounded-md text-[10px] leading-tight  bg-blue-400/20 dark:bg-blue-400/20 text-blue-700 dark:text-blue-400">
       {{ user.role }}
     </div>
   </template>
-  <div v-else-if="user.role"
-    class="px-1 py-0.5 rounded-md text-[10px] leading-tight  bg-blue-400/20 dark:bg-blue-400/20 text-blue-700 dark:text-blue-400">
-    {{ user.role }}
-  </div>
 </template>
 

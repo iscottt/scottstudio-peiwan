@@ -1,7 +1,10 @@
 <template>
   <div class="page-recommend__panel p-flex">
     <!-- 左侧 -->
-    <swiper :pagination="pagination" @transition-end="transitionEnd" :effect="'coverflow'" :coverflowEffect="{
+    <swiper v-if='playmateConfig.playmates' :autoplay="{
+      delay: playmateConfig.peiwan_delay || 5000,
+      disableOnInteraction: true
+    }" :pagination="pagination" @slideChange="transitionEnd" :effect="'coverflow'" :coverflowEffect="{
       rotate: 0,
       stretch: 200,
       depth: 700
@@ -9,7 +12,9 @@
       <template v-for="item in playmateConfig.playmates">
         <swiper-slide>
           <div class="cover">
-            <img :src="item.image" alt="">
+            <a :href="`/author/${currentPlaymateUser.id}`" role="button">
+              <img :src="item.image" alt="">
+            </a>
           </div>
         </swiper-slide>
       </template>
@@ -25,9 +30,6 @@
           <div class="flex items-center gap-1 mb-1">
             <UserMetas :user="currentPlaymateUser" :vip-level="currentPlaymateUser.vipLevel" :site_metas="siteMetas" />
           </div>
-          <!-- <div class="career-list p-flex">
-            <img v-for="img in currentBadges" :src="img.img" :data-tooltip="img.name">
-          </div> -->
         </div>
         <a class="btn" target="_blank" v-if="playmateConfig.playmates"
           :href="playmateConfig.playmates[swiperSlideIndex].url">{{ playmateConfig.playmates[swiperSlideIndex].text
@@ -36,9 +38,12 @@
     </swiper>
     <!-- 右侧 -->
     <div>
-      <swiper :autoplay="true" loop :pagination="paginationBanner" :centeredSlides="true" :allowTouchMove="true"
-        slidesPerView="auto" :watchOverflow="true" :observer="true" :observeParents="true" :observeSlideChildren="true"
-        class="banner-swiper" :modules="modules">
+      <swiper v-if="playmateConfig.banners" :autoplay="{
+        delay: playmateConfig.peiwan_delay || 5000,
+        disableOnInteraction: true
+      }" loop :pagination="paginationBanner" :centeredSlides="true" :allowTouchMove="true" slidesPerView="auto"
+        :watchOverflow="true" :observer="true" :observeParents="true" :observeSlideChildren="true" class="banner-swiper"
+        :modules="modules">
         <template v-for="item in playmateConfig.banners" :key="item.image">
           <swiper-slide>
             <a :href="item.url" target="_blank"><img :src="item.image" alt=""></a>
@@ -50,7 +55,7 @@
         <div class="type-list p-flex">
           <template v-for="(item, index) in playmateConfig.zones" :key="item.title">
             <div @click="zoneIndex = index" class="type p-flex" :class="{ active: index === zoneIndex }"> {{ item.title
-              }}
+            }}
               <a class="more p-flex" :href="item.url" role="button" target="_blank">更多<i></i></a>
             </div>
           </template>
@@ -83,8 +88,9 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import "swiper/css/pagination";
+import "swiper/css/autoplay";
 import 'swiper/css/effect-coverflow';
-import { EffectCoverflow, Pagination } from 'swiper/modules';
+import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 
 import axios from 'axios';
 import { computed, ref } from 'vue';
@@ -104,11 +110,12 @@ const paginationBanner = {
     return '<span class="' + className + '"></span>';
   },
 }
-const modules = [EffectCoverflow, Pagination]
+const modules = [EffectCoverflow, Pagination, Autoplay]
 const swiperSlideIndex = ref(0)
 const zoneIndex = ref(0)
-const playmateConfig = ref({})
-const piniaStore = sessionStorage.getItem('piniaStore')
+const playmateConfig = ref({
+  peiwan_delay:5000
+})
 const currentPlaymateUser = computed(() => {
   if (!playmateConfig.value.playmates) return {}
   return JSON.parse(playmateConfig.value.playmates[swiperSlideIndex.value].uid)
