@@ -1,6 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 const webpack = require('webpack')
 const path = require('path')
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = defineConfig({
 	pages: {},
@@ -18,7 +19,7 @@ module.exports = defineConfig({
 		config.plugins.delete('html')
 		config.plugins.delete('preload')
 		config.plugins.delete('prefetch')
-		config.optimization.minimize(false)// 开启压缩js代码
+		config.optimization.minimizer = [new UglifyJsPlugin()]// 开启压缩js代码
 	},
 	css: {
 		extract: {
