@@ -28,7 +28,7 @@
           <p class="nickname ellipsis font-semibold">{{ currentPlaymateUser.name }}</p>
 
           <div class="flex items-center gap-1 mb-1">
-            <UserMetas :user="currentPlaymateUser" :vip-level="currentPlaymateUser.vipLevel" :site_metas="siteMetas" />
+            <UserMetas :is_left="true" :user="currentPlaymateUser" :vip-level="currentPlaymateUser.vip_level" :site_metas="siteMetas" />
           </div>
         </div>
         <a class="btn" target="_blank" v-if="playmateConfig.playmates"
@@ -55,7 +55,7 @@
         <div class="type-list p-flex">
           <template v-for="(item, index) in playmateConfig.zones" :key="item.title">
             <div @click="zoneIndex = index" class="type p-flex" :class="{ active: index === zoneIndex }"> {{ item.title
-            }}
+              }}
               <a class="more p-flex" :href="item.url" role="button" target="_blank">更多<i></i></a>
             </div>
           </template>
@@ -114,11 +114,11 @@ const modules = [EffectCoverflow, Pagination, Autoplay]
 const swiperSlideIndex = ref(0)
 const zoneIndex = ref(0)
 const playmateConfig = ref({
-  peiwan_delay:5000
+  peiwan_delay: 5000
 })
 const currentPlaymateUser = computed(() => {
   if (!playmateConfig.value.playmates) return {}
-  return JSON.parse(playmateConfig.value.playmates[swiperSlideIndex.value].uid)
+  return playmateConfig.value.playmates[swiperSlideIndex.value].user
 })
 function transitionEnd(e) {
   swiperSlideIndex.value = e.realIndex
@@ -131,6 +131,27 @@ async function requestData() {
     url: '/peiwan/site-opts'
   })
   siteMetas.value = data
+  const { playmates } = data;
+  const allUserIds = [
+    ...playmates.playmates.map(item => item.uid),
+    ...playmates.zones.flatMap(zone => zone.uids)
+  ];
+  const uniqueUserIds = [...new Set(allUserIds.filter(Boolean))];
+  if (uniqueUserIds.length > 0) {
+    // 5. 使用单个请求获取所有用户数据
+    const { data: userData } = await axios.post('/peiwan/query-users', {
+      include: uniqueUserIds
+    });
+    // 6. 创建用户数据映射表提高查找效率
+    const userMap = new Map(userData.map(user => [user.id, user]));
+    // 7. 优化数据处理逻辑
+    playmates.playmates.forEach(item => {
+      item.user = userMap.get(item.uid);
+    });
+    playmates.zones.forEach(zone => {
+      zone.users = zone.uids.map(uid => userMap.get(uid)).filter(Boolean);
+    });
+  }
   playmateConfig.value = data.playmates
   badges.value = data.sc_badges
 }
@@ -139,8 +160,7 @@ const currentUserList = computed(() => {
   if (!zoneData?.uids) return []
 
   const badgeItems = badges.value
-  return zoneData.uids.map(item => {
-    const user = JSON.parse(item)
+  return zoneData.users.map(user => {
     user.formatBadges = badgeItems.filter((badge, index) =>
       user.badges?.[index] === badge.name
     )
@@ -241,10 +261,7 @@ requestData()
 }
 
 .page-recommend__panel .playmate-detail .btn {
-  width: 72px;
-  height: 32px;
-  line-height: 32px;
-  font-size: 18px;
+  padding: 2px 12px;
   text-align: center;
   color: #fff;
   background: linear-gradient(115deg, #ff00e5, #ff6969);

@@ -414,6 +414,7 @@ button.swiper-pagination-bullet {
 
 
 
+
 .page-recommend__panel {
   padding: 48px 0;
   justify-content: center;
@@ -489,10 +490,7 @@ button.swiper-pagination-bullet {
   border-radius: 2px
 }
 .page-recommend__panel .playmate-detail .btn {
-  width: 72px;
-  height: 32px;
-  line-height: 32px;
-  font-size: 18px;
+  padding: 2px 12px;
   text-align: center;
   color: #fff;
   background: linear-gradient(115deg, #ff00e5, #ff6969);

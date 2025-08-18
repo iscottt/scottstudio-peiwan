@@ -15,7 +15,7 @@
 						<template v-slot:column-uid="row">
 							<n-select v-model:value="formData_REF.playmates[row.$index].uid" :render-label="renderLabel"
 								:render-tag="renderSingleSelectTag" filterable placeholder="搜索用户" :options="user_options"
-								:loading="loading" clearable remote @search="handleSearch" label-field="name" value-field="value" />
+								:loading="loading" clearable remote @search="handleSearch" label-field="name" value-field="id" />
 						</template>
 
 						<template v-slot:column-url="row">
@@ -41,7 +41,7 @@
 						<template v-slot:column-uids="row">
 							<n-select v-model:value="formData_REF.zones[row.$index].uids" multiple :render-label="renderLabel"
 								:render-tag="renderMultipleSelectTag" filterable placeholder="搜索用户" :options="user_options"
-								:loading="loading" clearable remote @search="handleSearch" label-field="name" value-field="value" />
+								:loading="loading" clearable remote @search="handleSearch" label-field="name" value-field="id" />
 						</template>
 						<template v-slot:column-url="row">
 							<NInput placeholder="http(s)://" v-model:value="formData_REF.zones[row.$index].url" />
@@ -267,7 +267,6 @@ function handleSearch(keyword) {
 			keyword
 		}
 	}).then(({ data }) => {
-		data.map(item => item.value = JSON.stringify(item))
 		user_options.value = data
 	})
 		.finally(() => {
