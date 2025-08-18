@@ -46,3 +46,9 @@ register_rest_route('peiwan', 'site-opts', {
 		return { ...opts }
 	}
 })
+register_rest_route('peiwan', 'query-users', {
+	methods: 'post',
+	callback(data, req) {
+		return query_users({include:data.include})
+	}
+})

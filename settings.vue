@@ -83,7 +83,7 @@ var formConfig_REF = computed(() => ({
 			label: "自动轮播间隔时间(单位：毫秒ms)", type: "InputNumber", prop: "peiwan_delay",
 			desc: '默认为5000ms，1秒=1000ms',
 			config: {
-				placeholder: '请输入节点选择器'
+				placeholder: '请输入...'
 			},
 		},
 		{
