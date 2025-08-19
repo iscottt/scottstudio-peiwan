@@ -20,9 +20,6 @@ const formatCurrentTime = computed(() => formatTime(currentTime.value))
 // 生命周期
 onMounted(() => {
   audio.value.src = props.audio_url
-  setTimeout(() => {
-    range.value.value = 0
-  }, 1)
 })
 
 // 方法
@@ -73,7 +70,7 @@ function formatTime(value) {
         试听
       </div>
     </div>
-    <audio ref="audio" style="display: none" controls @timeupdate="update" @canplay="loadingFinish" />
+    <audio ref="audio" style="display: none" controls @timeupdate="update" @ended="pause" @canplay="loadingFinish" />
   </div>
 
 </template>
