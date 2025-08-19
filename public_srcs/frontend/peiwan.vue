@@ -1,11 +1,10 @@
 <template>
   <div class="page-recommend__panel p-flex">
     <!-- 左侧 -->
-     <!-- :autoplay="{
+    <swiper :autoplay="{
       delay: playmateConfig.peiwan_delay || 5000,
       disableOnInteraction: true
-    }" -->
-    <swiper v-if='playmateConfig.playmates'  :pagination="pagination" @slideChange="transitionEnd" :effect="'coverflow'" :coverflowEffect="{
+    }" v-if='playmateConfig.playmates'  :pagination="pagination" @slideChange="transitionEnd" :effect="'coverflow'" :coverflowEffect="{
       rotate: 0,
       stretch: 200,
       depth: 700
