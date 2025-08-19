@@ -51,8 +51,6 @@ register_rest_route('peiwan', 'query-users', {
 	callback(data, req) {
 		const users = query_users({include:data.include})
 		return users.map(user => {
-			const vipRecord = userVipDB.find(record => record.user_id === user.id && new Date(record.expire_time) > Date.now())
-			user.vip_level = vipRecord.length > 0 ? vipRecord[vipRecord.length - 1].level : 0
 			user.badges = get_user_meta(user.id, 'badges') || []
 			const defaultBadge = user.badges.length ? user.badges[0] : ''
 			user.wear_badge = get_user_meta(user.id, 'wear_badge') || defaultBadge

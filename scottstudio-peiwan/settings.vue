@@ -9,6 +9,14 @@
 						<template v-slot:column-image="row">
 							<nv-thumbnail-selector :height="40" v-model:value="formData_REF.playmates[row.$index].image" />
 						</template>
+						<template v-slot:column-audio="row">
+							<NInputGroup>
+								<NInput v-model:value="formData_REF.playmates[row.$index].audio" />
+								<NButton @click="handleChoose(row.$index)">
+									<i class="el-icon-upload2"></i>
+								</NButton>
+							</NInputGroup>
+						</template>
 						<template v-slot:column-text="row">
 							<NInput v-model:value="formData_REF.playmates[row.$index].text" />
 						</template>
@@ -49,17 +57,53 @@
 					</nvSettingTable>
 				</template>
 			</pdForm>
+		<nvMediaSelector v-model:visibility="visibility_REF" title="选择文件" @select-confirm="handleSelected" />
 		</div>
 	</div>
 </template>
 
 <script setup>
 var { ref, onMounted, computed,h } = nv.Vue;
-var { pdForm, nvThumbnailSelector } = nv.components;
-var { NInput,NAvatar,NTag } = nv.components.naiveUI;
+var { pdForm, nvThumbnailSelector,nvMediaSelector } = nv.components;
+var { NInput,NAvatar,NTag,NInputGroup,NButton } = nv.components.naiveUI;
 var { $axios, $API } = nv;
 
 var formData_REF = ref({})
+
+var visibility_REF = ref(false)
+var chooseIndex = ref(0)
+const handleChoose = index => {
+	visibility_REF.value = true
+	chooseIndex.value = index
+}
+/**
+ * 检查文件后缀是否为音频格式
+ * @param {string} fileName - 文件名（或完整路径）
+ * @returns {boolean} - 是否为音频文件
+ */
+function isAudioFile(fileName) {
+  // 常见音频格式列表（可扩展）
+  const audioExtensions = [
+    'mp3', 'wav', 'ogg', 'flac', 'aac', 
+    'm4a', 'wma', 'aiff', 'alac', 'opus'
+  ];
+  
+  // 提取文件后缀并转为小写
+  const fileExtension = fileName.toLowerCase();
+  
+  // 检查后缀是否在音频格式列表中
+  return audioExtensions.includes(fileExtension);
+}
+// 点击按钮的回调效果
+var handleSelected = files => {
+	const file = files[0];
+	console.log('file',file)
+	if (!isAudioFile(file.fileExt)) {
+		$message.error('请选择音频文件')
+		return
+	}
+	formData_REF.value.playmates[chooseIndex.value].audio = file.urls.original
+}
 
 var formConfig_REF = computed(() => ({
 	form: {
@@ -141,6 +185,7 @@ const playmateColumns = [
 	{ title: '大图', key: 'image' },
 	{ title: '按钮文案', key: 'text' },
 	{ title: '按钮链接', key: 'url' },
+	{ title: '音频链接', key: 'audio' },
 ]
 const zoneColumns = [
 	{ title: '标题', key: 'title' },

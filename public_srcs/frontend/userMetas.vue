@@ -13,10 +13,6 @@ const props = defineProps({
     type: Object,
     default: {}
   },
-  vipLevel: {
-    type: Object,
-    default: {}
-  },
   site_metas:{
     type: Object,
     default: {}
@@ -48,12 +44,6 @@ const lastLevel = computed(() => {
   if (!props.site_metas.sc_levels || !props.site_metas.sc_levels.length)
     return ''
   return props.site_metas.sc_levels[props.site_metas.sc_levels.length - 1].img
-})
-const vipLevel = computed(() => {
-  const user_vip_level = props.vipLevel
-  const vipTypeList = props.site_metas.sonare_vip_config_types || []
-  const findOne = vipTypeList.find(item => item.level === user_vip_level)
-  return findOne || {}
 })
 const userID = computed(() => {
   return props.user.id
@@ -95,10 +85,6 @@ const currentBadge = computed(() => {
     :data-tooltip="`ID${isBeautifulID(userID) ? '靓' : ''}号:${userID}`">
     <span class="blogger-tag warn !font-bold">ID:{{ userID }}</span>
   </span>
-  <!-- 会员徽章 -->
-  <div v-if="vipLevel.name && is_left" :data-tooltip="vipLevel.name">
-    <img :src="vipLevel.img" class="h-4">
-  </div>
   <template v-if="user.badges">
     <!-- 自定义徽章 -->
     <div v-if="isUser"

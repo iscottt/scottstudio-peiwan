@@ -1,10 +1,11 @@
 <template>
   <div class="page-recommend__panel p-flex">
     <!-- 左侧 -->
-    <swiper v-if='playmateConfig.playmates' :autoplay="{
+     <!-- :autoplay="{
       delay: playmateConfig.peiwan_delay || 5000,
       disableOnInteraction: true
-    }" :pagination="pagination" @slideChange="transitionEnd" :effect="'coverflow'" :coverflowEffect="{
+    }" -->
+    <swiper v-if='playmateConfig.playmates'  :pagination="pagination" @slideChange="transitionEnd" :effect="'coverflow'" :coverflowEffect="{
       rotate: 0,
       stretch: 200,
       depth: 700
@@ -28,9 +29,10 @@
           <p class="nickname ellipsis font-semibold">{{ currentPlaymateUser.name }}</p>
 
           <div class="flex items-center gap-1 mb-1">
-            <UserMetas :is_left="true" :user="currentPlaymateUser" :vip-level="currentPlaymateUser.vip_level" :site_metas="siteMetas" />
+            <UserMetas :is_left="true" :user="currentPlaymateUser" :site_metas="siteMetas" />
           </div>
         </div>
+        <Audio :audio_url="playmateConfig.playmates[swiperSlideIndex].audio" v-if="playmateConfig.playmates[swiperSlideIndex].audio"/>
         <a class="btn" target="_blank" v-if="playmateConfig.playmates"
           :href="playmateConfig.playmates[swiperSlideIndex].url">{{ playmateConfig.playmates[swiperSlideIndex].text
           }}</a>
@@ -69,7 +71,7 @@
               <p class="nickname ellipsis font-semibold">{{ user.name }}</p>
 
               <div class="flex items-center justify-center gap-1 mb-1">
-                <UserMetas :user="user" :vip-level="user.vipLevel" :site_metas="siteMetas" />
+                <UserMetas :user="user" :site_metas="siteMetas" />
               </div>
               <!-- <div class="career-list p-flex">
                 <span v-for="img in user.formatBadges" alt="" :key="img.img" :data-tooltip="img.name">
@@ -95,6 +97,7 @@ import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import axios from 'axios';
 import { computed, ref } from 'vue';
 import UserMetas from './userMetas.vue';
+import Audio from './audio.vue';
 
 const pagination = {
   el: '.playmate-swiper__pagination',
@@ -261,11 +264,12 @@ requestData()
 }
 
 .page-recommend__panel .playmate-detail .btn {
-  padding: 2px 12px;
+  padding: 2px 8px;
   text-align: center;
   color: #fff;
   background: linear-gradient(115deg, #ff00e5, #ff6969);
   border-radius: 16px;
+  font-size: 12px;
   cursor: pointer
 }
 
