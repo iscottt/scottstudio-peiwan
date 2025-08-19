@@ -32324,51 +32324,48 @@ var peiwanvue_type_script_setup_true_lang_js_hoisted_2 = {
 };
 var peiwanvue_type_script_setup_true_lang_js_hoisted_3 = ["href"];
 var peiwanvue_type_script_setup_true_lang_js_hoisted_4 = ["src"];
-var peiwanvue_type_script_setup_true_lang_js_hoisted_5 = /*#__PURE__*/(0,external_Vue_namespaceObject.createElementVNode)("div", {
-  "class": "playmate-swiper__pagination"
-}, null, -1);
-var peiwanvue_type_script_setup_true_lang_js_hoisted_6 = ["src"];
-var peiwanvue_type_script_setup_true_lang_js_hoisted_7 = {
+var peiwanvue_type_script_setup_true_lang_js_hoisted_5 = ["src"];
+var peiwanvue_type_script_setup_true_lang_js_hoisted_6 = {
   "class": "playmate-detail p-flex"
 };
-var peiwanvue_type_script_setup_true_lang_js_hoisted_8 = ["href"];
-var peiwanvue_type_script_setup_true_lang_js_hoisted_9 = ["src"];
-var peiwanvue_type_script_setup_true_lang_js_hoisted_10 = {
+var peiwanvue_type_script_setup_true_lang_js_hoisted_7 = ["href"];
+var peiwanvue_type_script_setup_true_lang_js_hoisted_8 = ["src"];
+var peiwanvue_type_script_setup_true_lang_js_hoisted_9 = {
   "class": "info"
 };
-var peiwanvue_type_script_setup_true_lang_js_hoisted_11 = {
+var peiwanvue_type_script_setup_true_lang_js_hoisted_10 = {
   "class": "nickname ellipsis font-semibold"
 };
-var peiwanvue_type_script_setup_true_lang_js_hoisted_12 = {
+var peiwanvue_type_script_setup_true_lang_js_hoisted_11 = {
   "class": "flex items-center gap-1 mb-1"
 };
+var peiwanvue_type_script_setup_true_lang_js_hoisted_12 = ["href"];
 var _hoisted_13 = ["href"];
-var _hoisted_14 = ["href"];
-var _hoisted_15 = ["src"];
-var _hoisted_16 = /*#__PURE__*/(0,external_Vue_namespaceObject.createElementVNode)("div", {
+var _hoisted_14 = ["src"];
+var _hoisted_15 = /*#__PURE__*/(0,external_Vue_namespaceObject.createElementVNode)("div", {
   "class": "banner-swiper__pagination"
 }, null, -1);
-var _hoisted_17 = {
+var _hoisted_16 = {
   "class": "activity-zone"
 };
-var _hoisted_18 = {
+var _hoisted_17 = {
   "class": "type-list p-flex"
 };
-var _hoisted_19 = ["onClick"];
-var _hoisted_20 = ["href"];
-var _hoisted_21 = /*#__PURE__*/(0,external_Vue_namespaceObject.createElementVNode)("i", null, null, -1);
-var _hoisted_22 = {
+var _hoisted_18 = ["onClick"];
+var _hoisted_19 = ["href"];
+var _hoisted_20 = /*#__PURE__*/(0,external_Vue_namespaceObject.createElementVNode)("i", null, null, -1);
+var _hoisted_21 = {
   "class": "playmate-list p-flex"
 };
-var _hoisted_23 = ["href"];
-var _hoisted_24 = {
+var _hoisted_22 = ["href"];
+var _hoisted_23 = {
   "class": "cover"
 };
-var _hoisted_25 = ["src"];
-var _hoisted_26 = {
+var _hoisted_24 = ["src"];
+var _hoisted_25 = {
   "class": "nickname ellipsis font-semibold"
 };
-var _hoisted_27 = {
+var _hoisted_26 = {
   "class": "flex items-center justify-center gap-1 mb-1"
 };
 
@@ -32502,7 +32499,6 @@ var _hoisted_27 = {
           delay: playmateConfig.value.peiwan_delay || 5000,
           disableOnInteraction: true
         },
-        pagination: pagination,
         onSlideChange: transitionEnd,
         effect: 'coverflow',
         coverflowEffect: {
@@ -32530,19 +32526,19 @@ var _hoisted_27 = {
               }),
               _: 2
             }, 1024);
-          }), 256)), peiwanvue_type_script_setup_true_lang_js_hoisted_5, playmateConfig.value.peiwan_tag ? ((0,external_Vue_namespaceObject.openBlock)(), (0,external_Vue_namespaceObject.createElementBlock)("img", {
+          }), 256)), playmateConfig.value.peiwan_tag ? ((0,external_Vue_namespaceObject.openBlock)(), (0,external_Vue_namespaceObject.createElementBlock)("img", {
             key: 0,
             src: playmateConfig.value.peiwan_tag,
             alt: "",
             "class": "tag"
-          }, null, 8, peiwanvue_type_script_setup_true_lang_js_hoisted_6)) : (0,external_Vue_namespaceObject.createCommentVNode)("", true), (0,external_Vue_namespaceObject.createElementVNode)("div", peiwanvue_type_script_setup_true_lang_js_hoisted_7, [(0,external_Vue_namespaceObject.createElementVNode)("a", {
+          }, null, 8, peiwanvue_type_script_setup_true_lang_js_hoisted_5)) : (0,external_Vue_namespaceObject.createCommentVNode)("", true), (0,external_Vue_namespaceObject.createElementVNode)("div", peiwanvue_type_script_setup_true_lang_js_hoisted_6, [(0,external_Vue_namespaceObject.createElementVNode)("a", {
             "class": "avatar",
             href: "/author/".concat(currentPlaymateUser.value.id),
             role: "button"
           }, [(0,external_Vue_namespaceObject.createElementVNode)("img", {
             src: currentPlaymateUser.value.avatar,
             alt: ""
-          }, null, 8, peiwanvue_type_script_setup_true_lang_js_hoisted_9)], 8, peiwanvue_type_script_setup_true_lang_js_hoisted_8), (0,external_Vue_namespaceObject.createElementVNode)("div", peiwanvue_type_script_setup_true_lang_js_hoisted_10, [(0,external_Vue_namespaceObject.createElementVNode)("p", peiwanvue_type_script_setup_true_lang_js_hoisted_11, (0,external_Vue_namespaceObject.toDisplayString)(currentPlaymateUser.value.name), 1), (0,external_Vue_namespaceObject.createElementVNode)("div", peiwanvue_type_script_setup_true_lang_js_hoisted_12, [(0,external_Vue_namespaceObject.createVNode)(userMetas, {
+          }, null, 8, peiwanvue_type_script_setup_true_lang_js_hoisted_8)], 8, peiwanvue_type_script_setup_true_lang_js_hoisted_7), (0,external_Vue_namespaceObject.createElementVNode)("div", peiwanvue_type_script_setup_true_lang_js_hoisted_9, [(0,external_Vue_namespaceObject.createElementVNode)("p", peiwanvue_type_script_setup_true_lang_js_hoisted_10, (0,external_Vue_namespaceObject.toDisplayString)(currentPlaymateUser.value.name), 1), (0,external_Vue_namespaceObject.createElementVNode)("div", peiwanvue_type_script_setup_true_lang_js_hoisted_11, [(0,external_Vue_namespaceObject.createVNode)(userMetas, {
             is_left: true,
             user: currentPlaymateUser.value,
             site_metas: siteMetas.value
@@ -32554,7 +32550,7 @@ var _hoisted_27 = {
             "class": "btn",
             target: "_blank",
             href: playmateConfig.value.playmates[swiperSlideIndex.value].url
-          }, (0,external_Vue_namespaceObject.toDisplayString)(playmateConfig.value.playmates[swiperSlideIndex.value].text), 9, _hoisted_13)) : (0,external_Vue_namespaceObject.createCommentVNode)("", true)])];
+          }, (0,external_Vue_namespaceObject.toDisplayString)(playmateConfig.value.playmates[swiperSlideIndex.value].text), 9, peiwanvue_type_script_setup_true_lang_js_hoisted_12)) : (0,external_Vue_namespaceObject.createCommentVNode)("", true)])];
         }),
         _: 1
       }, 8, ["autoplay"])) : (0,external_Vue_namespaceObject.createCommentVNode)("", true), (0,external_Vue_namespaceObject.createElementVNode)("div", null, [playmateConfig.value.banners ? ((0,external_Vue_namespaceObject.openBlock)(), (0,external_Vue_namespaceObject.createBlock)((0,external_Vue_namespaceObject.unref)(swiper_vue_Swiper), {
@@ -32587,14 +32583,14 @@ var _hoisted_27 = {
                 }, [(0,external_Vue_namespaceObject.createElementVNode)("img", {
                   src: item.image,
                   alt: ""
-                }, null, 8, _hoisted_15)], 8, _hoisted_14)];
+                }, null, 8, _hoisted_14)], 8, _hoisted_13)];
               }),
               _: 2
             }, 1024);
-          }), 128)), _hoisted_16];
+          }), 128)), _hoisted_15];
         }),
         _: 1
-      }, 8, ["autoplay"])) : (0,external_Vue_namespaceObject.createCommentVNode)("", true), (0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_17, [(0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_18, [((0,external_Vue_namespaceObject.openBlock)(true), (0,external_Vue_namespaceObject.createElementBlock)(external_Vue_namespaceObject.Fragment, null, (0,external_Vue_namespaceObject.renderList)(playmateConfig.value.zones, function (item, index) {
+      }, 8, ["autoplay"])) : (0,external_Vue_namespaceObject.createCommentVNode)("", true), (0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_16, [(0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_17, [((0,external_Vue_namespaceObject.openBlock)(true), (0,external_Vue_namespaceObject.createElementBlock)(external_Vue_namespaceObject.Fragment, null, (0,external_Vue_namespaceObject.renderList)(playmateConfig.value.zones, function (item, index) {
         return (0,external_Vue_namespaceObject.openBlock)(), (0,external_Vue_namespaceObject.createElementBlock)("div", {
           key: item.title,
           onClick: function onClick($event) {
@@ -32608,19 +32604,19 @@ var _hoisted_27 = {
           href: item.url,
           role: "button",
           target: "_blank"
-        }, [(0,external_Vue_namespaceObject.createTextVNode)("更多"), _hoisted_21], 8, _hoisted_20)], 10, _hoisted_19);
-      }), 128))]), (0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_22, [((0,external_Vue_namespaceObject.openBlock)(true), (0,external_Vue_namespaceObject.createElementBlock)(external_Vue_namespaceObject.Fragment, null, (0,external_Vue_namespaceObject.renderList)(currentUserList.value, function (user) {
+        }, [(0,external_Vue_namespaceObject.createTextVNode)("更多"), _hoisted_20], 8, _hoisted_19)], 10, _hoisted_18);
+      }), 128))]), (0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_21, [((0,external_Vue_namespaceObject.openBlock)(true), (0,external_Vue_namespaceObject.createElementBlock)(external_Vue_namespaceObject.Fragment, null, (0,external_Vue_namespaceObject.renderList)(currentUserList.value, function (user) {
         return (0,external_Vue_namespaceObject.openBlock)(), (0,external_Vue_namespaceObject.createElementBlock)("a", {
           "class": "item",
           href: "/author/".concat(user.id),
           role: "button"
-        }, [(0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_24, [(0,external_Vue_namespaceObject.createElementVNode)("img", {
+        }, [(0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_23, [(0,external_Vue_namespaceObject.createElementVNode)("img", {
           src: user.avatar,
           alt: ""
-        }, null, 8, _hoisted_25)]), (0,external_Vue_namespaceObject.createElementVNode)("p", _hoisted_26, (0,external_Vue_namespaceObject.toDisplayString)(user.name), 1), (0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_27, [(0,external_Vue_namespaceObject.createVNode)(userMetas, {
+        }, null, 8, _hoisted_24)]), (0,external_Vue_namespaceObject.createElementVNode)("p", _hoisted_25, (0,external_Vue_namespaceObject.toDisplayString)(user.name), 1), (0,external_Vue_namespaceObject.createElementVNode)("div", _hoisted_26, [(0,external_Vue_namespaceObject.createVNode)(userMetas, {
           user: user,
           site_metas: siteMetas.value
-        }, null, 8, ["user", "site_metas"])])], 8, _hoisted_23);
+        }, null, 8, ["user", "site_metas"])])], 8, _hoisted_22);
       }), 256))]), (0,external_Vue_namespaceObject.createElementVNode)("b", {
         style: (0,external_Vue_namespaceObject.normalizeStyle)("background: url('".concat(playmateConfig.value.zone_tag, "') no-repeat;"))
       }, null, 4)])])]);
@@ -32629,10 +32625,10 @@ var _hoisted_27 = {
 });
 ;// CONCATENATED MODULE: ./frontend/peiwan.vue?vue&type=script&setup=true&lang=js
  
-;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./frontend/peiwan.vue?vue&type=style&index=0&id=1483c936&lang=css
+;// CONCATENATED MODULE: ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./frontend/peiwan.vue?vue&type=style&index=0&id=0c41b27e&lang=css
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./frontend/peiwan.vue?vue&type=style&index=0&id=1483c936&lang=css
+;// CONCATENATED MODULE: ./frontend/peiwan.vue?vue&type=style&index=0&id=0c41b27e&lang=css
 
 ;// CONCATENATED MODULE: ./frontend/peiwan.vue
 

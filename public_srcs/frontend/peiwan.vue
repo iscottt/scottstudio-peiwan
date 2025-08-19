@@ -4,7 +4,7 @@
     <swiper :autoplay="{
       delay: playmateConfig.peiwan_delay || 5000,
       disableOnInteraction: true
-    }" v-if='playmateConfig.playmates'  :pagination="pagination" @slideChange="transitionEnd" :effect="'coverflow'" :coverflowEffect="{
+    }" v-if='playmateConfig.playmates' @slideChange="transitionEnd" :effect="'coverflow'" :coverflowEffect="{
       rotate: 0,
       stretch: 200,
       depth: 700
@@ -18,7 +18,6 @@
           </div>
         </swiper-slide>
       </template>
-      <div class="playmate-swiper__pagination"></div>
       <img v-if="playmateConfig.peiwan_tag" :src="playmateConfig.peiwan_tag" alt="" class="tag">
       <div class="playmate-detail p-flex">
         <a class="avatar" :href="`/author/${currentPlaymateUser.id}`" role="button">
@@ -98,13 +97,6 @@ import { computed, ref } from 'vue';
 import UserMetas from './userMetas.vue';
 import Audio from './audio.vue';
 
-const pagination = {
-  el: '.playmate-swiper__pagination',
-  clickable: true,
-  renderBullet: function (index, className) {
-    return '<span class="' + className + '"></span>';
-  },
-}
 const paginationBanner = {
   el: '.banner-swiper__pagination',
   clickable: true,
