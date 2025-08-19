@@ -32,7 +32,7 @@
             <UserMetas :is_left="true" :user="currentPlaymateUser" :site_metas="siteMetas" />
           </div>
         </div>
-        <Audio :audio_url="playmateConfig.playmates[swiperSlideIndex].audio" v-if="playmateConfig.playmates[swiperSlideIndex].audio"/>
+        <Audio :audio_url="currentAudio" v-if="currentAudio && showAudio"/>
         <a class="btn" target="_blank" v-if="playmateConfig.playmates"
           :href="playmateConfig.playmates[swiperSlideIndex].url">{{ playmateConfig.playmates[swiperSlideIndex].text
           }}</a>
@@ -116,8 +116,13 @@ const paginationBanner = {
 const modules = [EffectCoverflow, Pagination, Autoplay]
 const swiperSlideIndex = ref(0)
 const zoneIndex = ref(0)
+const showAudio = ref(true)
 const playmateConfig = ref({
   peiwan_delay: 5000
+})
+const currentAudio = computed(() => {
+  if (!playmateConfig.value.playmates) return {}
+  return playmateConfig.value.playmates[swiperSlideIndex.value].audio
 })
 const currentPlaymateUser = computed(() => {
   if (!playmateConfig.value.playmates) return {}
@@ -125,6 +130,10 @@ const currentPlaymateUser = computed(() => {
 })
 function transitionEnd(e) {
   swiperSlideIndex.value = e.realIndex
+  showAudio.value = false
+  setTimeout(() => {
+    showAudio.value = true
+  }, 1);
 }
 const badges = ref([])
 const siteMetas = ref([])
